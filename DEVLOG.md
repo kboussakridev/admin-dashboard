@@ -78,6 +78,12 @@ offrant une interface moderne et responsive pour la gestion des données.
   npm install react-router-dom lucide-react recharts
   ```
 
+10. Installation de framer-motion (framer-motion v10.12.16) :
+
+- Cette bibliothèque est utilisée pour ajouter des animations fluides et interactives à l'interface utilisateur.
+  ```bash
+  npm install framer-motion
+  ```
 ---
 
 ## Démarrage du projet
