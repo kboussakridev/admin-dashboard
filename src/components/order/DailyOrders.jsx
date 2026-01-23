@@ -1,24 +1,24 @@
 import {
   LineChart,
+  Legend,
   Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
 import { motion } from "framer-motion";
 
-const salesData = [
-  { name: "Jan", sales: 2500 },
-  { name: "Feb", sales: 5000 },
-  { name: "Mar", sales: 7500 },
-  { name: "Apr", sales: 5000 },
-  { name: "May", sales: 9000 },
-  { name: "Jun", sales: 10000 },
+const ordersData = [
+  { name: "Jan", orders: 1000 },
+  { name: "Feb", orders: 1500 },
+  { name: "Mar", orders: 2000 },
+  { name: "Apr", orders: 3000 },
+  { name: "May", orders: 4000 },
+  { name: "Jun", orders: 5000 },
 ];
-const SalesTrendChart = () => {
+const DailyOrdersChart = () => {
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl border border-gray-700 p-6"
@@ -28,11 +28,11 @@ const SalesTrendChart = () => {
     >
       {/* Doc de configuration: https://recharts.github.io/en-US/api/ */}
       <h2 className="text-lg font-semibold text-gray-100 mb-4 ">
-        Tendance des ventes
+        Commandes quotidiennes
       </h2>
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
-          <LineChart data={salesData}>
+          <LineChart data={ordersData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#4B5563" />
             <XAxis dataKey="name" stroke="#9ca3af" />
             <YAxis stroke="#9ca3af" />
@@ -46,8 +46,8 @@ const SalesTrendChart = () => {
             <Legend />
             <Line
               type="monotone"
-              dataKey="sales"
-              name="Ventes"
+              dataKey="orders"
+              name="Commandes"
               stroke="#6366F1"
               strokeWidth={3}
               dot={{ fill: "#6366F1", strokeWidth: 2, r: 6 }}
@@ -60,4 +60,4 @@ const SalesTrendChart = () => {
   );
 };
 
-export default SalesTrendChart;
+export default DailyOrdersChart;

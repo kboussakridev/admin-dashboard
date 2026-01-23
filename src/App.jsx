@@ -3,6 +3,7 @@ import OverviewPage from "./pages/OverviewPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import SalesPage from "./pages/SalesPage.jsx";
+import OrdersPage from "./pages/OrdersPage.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/sales" element={<SalesPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
       </Routes>
     </div>
   );
