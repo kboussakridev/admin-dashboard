@@ -5,6 +5,7 @@ import UsersPage from "./pages/UsersPage.jsx";
 import SalesPage from "./pages/SalesPage.jsx";
 import OrdersPage from "./pages/OrdersPage.jsx";
 import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
 
 import Sidebar from "./components/Sidebar.jsx";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/sales" element={<SalesPage />} />
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </div>
   );

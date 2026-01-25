@@ -7,7 +7,7 @@ import {
   Users,
   Menu,
 } from "lucide-react";
-import { useState } from "react"; // React hook for state management
+import { useState, useEffect } from "react"; // React hook for state management
 import { motion } from "framer-motion"; // Animation library
 import { Link } from "react-router-dom"; // For navigation links
 import { AnimatePresence } from "framer-motion"; // For animating presence of components
@@ -23,10 +23,22 @@ const SIDEBAR_ITEMS = [
 ];
 
 const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      // Ferme la sidebar sur mobile, ouvre sur grand écran
+      setIsSidebarOpen(!mobile);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <motion.div
-      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? "w-64" : "w-20"} `}
+      className={`relative z-50 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? "w-64" : "w-20"} `}
       animate={{ width: isSidebarOpen ? 256 : 80 }}
     >
       <div className="h-full bg-gray-800 bg-opacity-70 backdrop-blur-md p-4 border-r border-gray-700 flex flex-col">
@@ -34,7 +46,7 @@ const Sidebar = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 hover:bg-gray-700 rounded-full transition-colors max-w-fit"
+          className="p-2 hover:bg-gray-700 rounded-full transition-colors max-w-fit hidden md:block"
         >
           <Menu size={24} />
         </motion.button>
@@ -42,9 +54,10 @@ const Sidebar = () => {
           {SIDEBAR_ITEMS.map((item, index) => (
             <Link to={item.href} key={item.href}>
               <motion.div
-                className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2 cursor-pointer"
+                className="relative flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2 cursor-pointer group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                // title={item.name}
               >
                 <item.icon
                   size={20}
@@ -63,6 +76,12 @@ const Sidebar = () => {
                     </motion.span>
                   )}
                 </AnimatePresence>
+                {/* Tooltip */}
+                {!isSidebarOpen && (
+                  <div className="absolute left-16 bg-gray-700 text-white text-xs rounded py-1 px-2 whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                    {item.name}
+                  </div>
+                )}
               </motion.div>
             </Link>
           ))}
